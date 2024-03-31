@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CoinmaniaTask.Models.Currency>
+
+@{
+    ViewData["Title"] = "GetCurrency";
+}
+
+<h1>Currency</h1>
+
+<a href="@Url.Action("GetCurrency", "Currency", new { sortByBase = true })" class="btn btn-primary">Sort by base</a>
+<a href="@Url.Action("GetCurrency", "Currency", new { sortByPrice = true })" class="btn btn-primary">Sort by Price</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Currency
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Last update date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr onclick="window.location.href = '@Url.Action("GetCurrencyHistory", "Currency", new { currency = item.BaseSymbol })'">
+                <td>
+                    @Html.DisplayFor(modelItem => item.BaseSymbol)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUpdateDate)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
